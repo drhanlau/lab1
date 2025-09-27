@@ -71,6 +71,25 @@
         <p>Phone: +60 123 456 789</p>
       </div>
     </section>
+
+    <!-- Opt-in Form Section -->
+    <section class="opt-in-form">
+      <div class="container">
+        <h2>Stay Updated!</h2>
+        <p>Subscribe to our newsletter to receive updates about future events and community initiatives.</p>
+        <form @submit.prevent="submitOptInForm" class="opt-in-form-container">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" v-model="optInForm.name" required placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" v-model="optInForm.email" required placeholder="Enter your email address">
+          </div>
+          <button type="submit" class="opt-in-btn">Subscribe</button>
+        </form>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -108,6 +127,23 @@ const addToCart = (flavor) => {
   }, 300)
 
   alert(`${flavor.name} added to your cart! Total: RM${cartTotal.value.toFixed(2)}`)
+}
+
+// Opt-in form state
+const optInForm = ref({
+  name: '',
+  email: ''
+})
+
+// Submit opt-in form
+const submitOptInForm = () => {
+  // In a real application, you would send this data to a server
+  // For now, we'll just show an alert with the collected data
+  alert(`Thank you for subscribing, ${optInForm.value.name}! We'll send updates to ${optInForm.value.email}.`)
+
+  // Reset the form
+  optInForm.value.name = ''
+  optInForm.value.email = ''
 }
 
 // Hero section animation
@@ -296,6 +332,83 @@ onMounted(() => {
   max-width: 600px;
   margin: 0 auto 10px auto;
   font-size: 1.1rem;
+}
+
+/* Opt-in form section */
+.opt-in-form {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  padding: 40px 0;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.opt-in-form h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #c62828;
+}
+
+.opt-in-form p {
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  font-size: 1.1rem;
+}
+
+.opt-in-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+  align-self: flex-start;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #c62828;
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.1);
+}
+
+.opt-in-btn {
+  background-color: #c62828;
+  color: white;
+  border: 2px solid #ffd700;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  align-self: center;
+}
+
+.opt-in-btn:hover {
+  background-color: #d32f2f;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  border-color: #ffcc00;
 }
 
 /* Responsive design */
